@@ -1,29 +1,23 @@
-const CATEGORIAS = ["Todos", "Accesorios", "Energía", "Periféricos"];
+const OPCIONES_MENU = [
+  { id: "inicio", etiqueta: "Inicio", icono: "⌂" },
+  { id: "academico", etiqueta: "Académico", icono: "▤" },
+  { id: "deportes", etiqueta: "Deportes", icono: "◉" },
+  { id: "eventos", etiqueta: "Eventos", icono: "◇" },
+  { id: "espacios", etiqueta: "Espacios universitarios", icono: "▦" },
+];
 
-export function Sidebar({ categoria, setCategoria, totalProductos }) {
+export function Sidebar({ seccionActiva, onNavigate }) {
   return (
-    <section className="sidebar-panel">
-      <p className="eyebrow">PANEL DE CONTROL</p>
-      <h2>Filtrar productos</h2>
-      <label htmlFor="category-filter">Categoría</label>
-      <select
-        id="category-filter"
-        className="form-select"
-        value={categoria}
-        onChange={(e) => setCategoria(e.target.value)}
-      >
-        {CATEGORIAS.map((item) => (
-          <option key={item} value={item}>{item}</option>
+    <nav className="sidebar-panel" aria-label="Secciones de Campus Hub">
+      <p className="eyebrow">EXPLORA EL CAMPUS</p>
+      <div className="sidebar-menu">
+        {OPCIONES_MENU.map((opcion) => (
+          <button key={opcion.id} type="button" className={seccionActiva === opcion.id ? "sidebar-link active" : "sidebar-link"} onClick={() => onNavigate(opcion.id)}>
+            <span className="menu-icon" aria-hidden="true">{opcion.icono}</span>{opcion.etiqueta}
+          </button>
         ))}
-      </select>
-
-      <div className="sidebar-summary">
-        <span className="summary-dot" />
-        <span>{totalProductos} productos en catálogo</span>
       </div>
-      <p className="sidebar-hint">
-        Selecciona una categoría para actualizar los resultados en tiempo real.
-      </p>
-    </section>
+      <div className="sidebar-help"><span aria-hidden="true">i</span><p>Consulta novedades, actividades y recursos de tu comunidad.</p></div>
+    </nav>
   );
 }

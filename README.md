@@ -1,37 +1,53 @@
-# TechStore — Dashboard Reactivo
+# Campus Hub
 
-Dashboard académico desarrollado con React y Vite para practicar componentes reutilizables, `useState`, `useEffect` y Bootstrap Grid.
+Vista inicial de un portal universitario construido con React, Vite y Bootstrap. Centraliza información académica, deportiva y de vida universitaria con datos locales de demostración.
 
 ## Requisitos
-- Node.js
+
+- Node.js 20 o superior
 - npm
 
-## Instalación
+## Instalación y ejecución
+
 ```bash
 npm install
 npm run dev
 ```
 
+Vite mostrará en la terminal la URL local para abrir la aplicación.
+
 ## Compilar para producción
+
 ```bash
 npm run build
 ```
 
-## Funcionalidades
-- Inicio de sesión de demostración con token guardado en `localStorage`.
-- Catálogo de productos.
-- Búsqueda reactiva por nombre.
-- Filtro reactivo por categoría.
-- Carga simulada de productos (1.6 segundos) con spinner de Bootstrap.
-- Cambio de tema claro/oscuro con persistencia en `localStorage`.
-- Cierre de sesión.
+## Qué funciona actualmente
+
+- Página de inicio con bienvenida al estudiante.
+- Menú lateral para Inicio, Académico, Deportes, Eventos y Espacios universitarios.
+- Navegación simple entre secciones sin backend ni rutas complejas.
+- Tres eventos deportivos de demostración con fecha, categoría y descripción.
+- Avisos académicos, actividades universitarias y disponibilidad de canchas, gimnasio y pista.
+- Diseño responsivo para celular y computadora, con Bootstrap para la cuadrícula y estilos propios de Campus Hub.
+
+## Variables de entorno
+
+La preview funciona completamente con datos locales y no requiere variables de entorno. Si en el futuro se conecta `src/services/api.js` a un backend GraphQL, copia `.env.example` como `.env` y configura `VITE_API_URL`. No se incluyen credenciales ni claves en el repositorio.
+
+## Pendiente de desarrollar
+
+- Autenticación real y perfiles de usuario.
+- Integración con servicios académicos, calendario y reservas de espacios.
+- Persistencia de inscripciones, avisos y disponibilidad en una base de datos.
+- Rutas completas y páginas de detalle para cada evento.
 
 ## Estructura principal
+
 ```text
 src/
   components/
     Footer.jsx
-    Login.jsx
     MainContent.jsx
     Navbar.jsx
     Sidebar.jsx
@@ -40,17 +56,4 @@ src/
   App.jsx
   App.css
   index.css
-  main.jsx
 ```
-
-## Nota académica
-El token de acceso es ficticio y únicamente demuestra el flujo de interfaz. No representa autenticación segura ni sustituye un backend.
-
-## Evidencias sugeridas para el reporte
-1. Árbol de `src/components` para demostrar estructura modular.
-2. `App.jsx` mostrando los dos `useEffect` y estados.
-3. Dashboard cargando con el spinner visible.
-4. Catálogo completo con tarjetas.
-5. Búsqueda y filtro por categoría en funcionamiento.
-6. Cambio de tema claro/oscuro y persistencia después de recargar.
-7. Login y cierre de sesión.

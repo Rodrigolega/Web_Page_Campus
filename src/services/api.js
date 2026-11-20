@@ -1,34 +1,26 @@
-//const GRAPHQL_URL = 'https://rickandmortyapi.com/graphql';
-const GRAPHQL_URL = 'https://graphqlzero.almansi.me/api';
+const GRAPHQL_URL = import.meta.env.VITE_API_URL;
 
 export async function queryGraphQL(query, variables = {}) {
-    // Obtener el token si existe
-    const token = localStorage.getItem('token');
+  if (!GRAPHQL_URL) {
+    throw new Error("VITE_API_URL no está configurada.");
+  }
 
-    // Objeto de cabeceras básicas para el header de autorización
-    const cabeceras = {
-        'Content-Type': 'application/json'
-    };
+  const token = localStorage.getItem("token");
+  const headers = { "Content-Type": "application/json" };
 
-    // Insertamos el token si existe
-    if (token) {
-        cabeceras['Authorization'] = `Bearer ${token}`;
-    }
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
 
-    const cuerpoPeticion = JSON.stringify({
-        query,
-        variables
-    });
+  const respuesta = await fetch(GRAPHQL_URL, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ query, variables }),
+  });
 
-    const respuesta = await fetch(GRAPHQL_URL, {
-        method: 'POST',
-        headers: cabeceras,
-        body: cuerpoPeticion
-    });
+  if (!respuesta.ok) {
+    throw new Error(`Error en la petición GraphQL: ${respuesta.status}`);
+  }
 
-    if (!respuesta.ok) {
-        throw new Error(`Error en la petición GraphQL: ${respuesta.status}`);
-    }
-
-    return respuesta.json();
+  return respuesta.json();
 }

@@ -1,11 +1,8 @@
 export function Footer() {
   return (
     <footer className="site-footer">
-      <div>
-        <strong>TechStore</strong>
-        <p>Catálogo de tecnología · Práctica de React</p>
-      </div>
-      <span>Dashboard académico · 2026</span>
+      <div><strong>Campus Hub</strong><p>Portal de vida académica y deportiva</p></div>
+      <span>© 2026 Comunidad universitaria</span>
     </footer>
   );
 }
